@@ -2,3 +2,4 @@ node_modules
 .npm-debug.log
 tmp
 .sass-cache
+src/main/webapp/assets/style/*.css

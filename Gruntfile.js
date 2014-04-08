@@ -1,12 +1,14 @@
 module.exports = function(grunt) {
 
+	var path = '/app';
+
  	grunt.initConfig({
 
     	pkg: grunt.file.readJSON('package.json'),
 	    
 		concat: {
 			options: {
-				separator: ';'
+				separator: ';\n'
 			},
 			dist: {
 				src: ['src/**/*.js'],
@@ -26,8 +28,14 @@ module.exports = function(grunt) {
 		},
 
 		jshint: {
-			files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
+			server: [
+                '**/*.js',
+                '!node_modules/**/*.js', 
+                '!dist/**/*.js',
+                '!app/assets/scripts/libs/**/*.js'
+            ],
 			options: {
+				node:true, 
 				// options here to override JSHint defaults
 				globals: {
 					jQuery: true,
@@ -38,17 +46,21 @@ module.exports = function(grunt) {
 				"-W099": true
 			}
 		},
-
+ 
 		watch: {
-			files: ['<%= jshint.files %>'],
-			tasks: ['jshint']
+			livereload: {
+				options: {
+					livereload: true
+				},
+				files: ['<%= path %>/**/*.{css, js, html}']
+			}
 		},
 
 		requirejs: {
 			compile: {
 				options: {
-					baseUrl: "src/main/webapp/assets/scripts",
-					mainConfigFile: "src/main/webapp/assets/scripts/config.js",
+					baseUrl: "<%= path %>/assets/scripts",
+					mainConfigFile: "<%= path %>/assets/scripts/config.js",
 					done: function(done, output) {
 						var duplicates = require('rjs-build-analysis').duplicates(output);
 
@@ -67,13 +79,29 @@ module.exports = function(grunt) {
 		compass: {
 			dist: {
 				options: {
-					sassDir: 'src/main/webapp/assets/styles/sass',
-					cssDir: 'src/main/webapp/assets/styles',
+					sassDir: '<%= path %>/assets/styles/sass',
+					cssDir: '<%= path %>/assets/styles',
 					raw: 'preferred_syntax = :sass\n' // Use `raw` since it's not directly available
 				}
 			}
-		}
+		},
 
+		concurrent: {
+			tasks: ['watch', 'jshint', 'web_server'],
+            options: {
+                logConcurrentOutput: true
+            }
+		},
+		
+		web_server: {
+		    options: {
+		      cors: true,
+		      port: 8000,
+		      nevercache: true,
+		      logRequests: true
+		    },
+		    foo: 'bar' // For some reason an extra key with a non-object value is necessary
+		  },
  	});
 
 	grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -82,9 +110,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-requirejs'); 
 	grunt.loadNpmTasks('grunt-contrib-compass');
+	grunt.loadNpmTasks('grunt-concurrent');
+	grunt.loadNpmTasks('grunt-web-server');	
 
-	grunt.registerTask('test', ['jshint']);
 	grunt.registerTask('style', ['compass']);
-	grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'requirejs']);
+	grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+	grunt.registerTask('server', [ 'concurrent'] );
 
 };

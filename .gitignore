@@ -2,4 +2,7 @@ node_modules
 .npm-debug.log
 tmp
 .sass-cache
+dist
+.grunt
+_SpecRunner.html
 src/main/webapp/assets/**/*.css

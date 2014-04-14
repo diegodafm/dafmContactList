@@ -1,5 +1,95 @@
 body{
+  header.main{
+    background: #334466;
+    margin-bottom: 10px;
+    .profile{
+      float:left;
+      img{
+        width: 50px;
+        margin:3px;
+      }
+      span.title{
+        color:#ffffff;
+        font-size: 16px;
+        font-weight: bolder;
+      }
+    }
+    nav{
+      float: right;
+      padding:10px;
+
+      .btn{
+        margin-right: 5px;
+        display: inline-block;
+      }
+      input.form-control{
+        display: inline-block;
+        width:300px;
+      }
+      .navbar-button{
+        padding: 8px;   
+      }
+    }
+  }
 	section{
-		background-color:red;
+    font-size:12px;
+    .card{
+      aside{
+        float: left;
+        figure{
+          img{
+            width: 100%;
+          }
+        }
+
+      }
+      .dropdown{
+        float: right;
+        position: absolute;
+        right: 25px;
+        top:5px;
+        z-index: 1;
+        .dropdown-menu{
+          left:-80px;
+          min-width: 100px;
+          li{
+            padding:5px 10px 5px 15px;
+            &:hover{
+              background: #c9e0ea;
+            }
+          }
+        }
+      }
+      header{
+        h3{
+          font-size: 14px;
+          margin: 10px 0;
+        }
+      }
+      ul.details{
+        list-style: none;
+        padding: 0px;
+
+        li{
+          padding: 5px 0;
+        }
+      }
+    }
 	}
+  .modalAddContact{
+      .modal-header{
+          h3{
+              margin: 0;
+          }
+      }
+  }   
+  ul{
+    list-style: none;
+    padding: 0px;
+
+    li{
+      padding: 5px 0;
+    }
+  }
+
 }

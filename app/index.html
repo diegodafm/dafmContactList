@@ -1,19 +1,78 @@
-<html>
+<!doctype html>
+<html lang="en">
 	<head>
-		<script src="assets/scripts/libs/require.js" data-main="assets/scripts/config.js"></script>
+		<link href="assets/styles/app.css" rel='stylesheet'>
+        <!-- Bootstrap -->
+        <link href="assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	</head>
-	<body>
-		<ul>
-			<li>lerolero </li>
-		</ul>
-		<ul>
-			<li>lerolero </li>
-		</ul>
-		<ul>
-			<li>lerolero </li>
-		</ul>
-		<ul>
-			<li>lerolero </li>
-		</ul>
+	<body ng-app="dafmContactList" ng-controller="ContactController" >        
+        <header class="main clearfix" >
+            <div class="profile left">
+                <img src="assets/images/diego.jpeg">
+                <span class="title">
+                    DAFM - Contact List
+                </span>
+            </div>
+            <nav class="">
+                <button type="button" class="btn btn-primary" ng-click="newContact()">
+                    <span class="glyphicon glyphicon-user"></span>
+                    Add Contact
+                </button>
+                <input class="form-control" type="text" placeholder="Search Contact" ng-model="searchContact">
+            </nav>
+        </header>
+        <main>
+            <section id="container" class="container-fluid">
+                <div class="card col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-2" id="{{item.id}}" ng-repeat="item in list | orderBy:'name' | filter:searchContact" >
+                    <div class="thumbnail">        
+                        <div class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-cog"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li ng-click="editContact(item)" > <i class="glyphicon glyphicon-pencil"></i> Edit</li>
+                                <li ng-click="removeContact(item)"> <i class="glyphicon glyphicon-trash"></i> Delete</li>
+                            </ul>
+                        </div>
+                        <div class="clearfix">
+                            <aside class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-2">
+                                <figure>
+                                    <img src="assets/images/user.png">
+                                </figure>
+                            </aside>                   
+                            <header class="col-xs-7 col-sm-7 col-md-7 col-lg-7 col-xl-2">
+                                <ul>
+                                    <li><h3>{{item.name}}</h3></li>
+                                    <li>
+                                        <span class="glyphicon glyphicon-phone-alt"></span>
+                                        {{item.phone}}
+                                    </li>
+                                </ul>
+                            </header>
+                        </div>
+
+                        <div>
+                            <span class='glyphicon glyphicon-map-marker'></span > {{item.address}}
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- jQuery -->
+        <script src="assets/libs/jquery/jquery-1.9.1.js"></script>         
+        
+        <!-- Angular -->
+        <script src="assets/libs/angular/angular.min.js"></script> 
+        <script src="assets/libs/angular/angular-route.min.js"></script> 
+          
+        <!-- APP -->
+		<script src="assets/scripts/app.js"></script>
+        <script src="assets/scripts/services/ContactService.js"></script>
+        <script src="assets/scripts/controllers/contactController.js"></script>
+        
+        <!-- Bootstrap -->
+        <script src="assets/libs/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/libs/bootstrap/js/bootstrap-ui.min.js"></script>
 	</body>
 </html>

@@ -1,0 +1,27 @@
+<div  class="modalAddContact" >
+    <form name="editContactForm">
+        
+
+        <div class="modal-header bg-danger">
+            <h3><span class="glyphicon glyphicon-trash"></span> {{title}}</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+                 <li>
+                    <span class='glyphicon glyphicon-user'></span > {{contact.name}}
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-phone-alt"></span>
+                    {{contact.phone}}
+                </li>
+                <li>
+                    <span class='glyphicon glyphicon-map-marker'></span > {{contact.address}}
+                </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-danger" ng-click="ok(contact)">Remove</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </form>
+</div>

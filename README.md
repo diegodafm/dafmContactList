@@ -18,9 +18,9 @@ Just follow these simple steps to run the DAFM Contact List:
 > Optional steps (Tests)
 4. To run the Karma/Jasmine test
 ```shell
-	grunt test-jasmine
+	grunt test-karma
 ```
-5. To run the Protractor test ( You need to use 2 terminals )
+5. To run the Protractor test ( You need to use 2 terminals at the same time )
 ```shell
 	grunt server 
 ```    
